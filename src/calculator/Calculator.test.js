@@ -1,16 +1,13 @@
 import Calculator from './Calculator'
 
+import data from './mockData'
+
 test('TD Calculator', () => {
-  const investment = {
-    value: 100,
-    tax: 5,
-    date: new Date('2020-01-01')
-  }
 
   const calc = new Calculator()
-  calc.invest(investment)
+  calc.invest(data[0])
   const result = calc.result()
-  console.log(result)
 
-  expect(result).toBe(104.96);
+  expect(result.fraction_tax).toBe(0.46);
+  expect(result.fraction_value).toBe(504.43);
 });
