@@ -2,12 +2,17 @@ import Calculator from './Calculator'
 
 import data from './mockData'
 
-test('TD Calculator', () => {
-
-  const calc = new Calculator()
-  calc.invest(data[0])
-  const result = calc.result()
-
-  expect(result.fraction_tax).toBe(0.46);
-  expect(result.fraction_value).toBe(504.43);
-});
+describe('TD Calculator', () => {
+  test('gives median for 1 investiment', () => {
+    const calc = new Calculator()
+    calc.invest(data[0])
+    const response = calc.median()
+  
+    const expectedMedian = {
+      quantity: 0.18,
+      tax: 2.56,
+      price: 2802.40
+    }
+    expect(response).toEqual(expectedMedian);
+  });  
+})
