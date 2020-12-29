@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 class FractionCalculator {
 
   static for(transaction) {
@@ -12,11 +14,13 @@ class FractionCalculator {
   }
 
   static taxFor(transaction) {
-    return parseFloat((transaction.tax * transaction.fraction).toFixed(2))
+    const tax = transaction.tax * transaction.fraction
+    return _.round(tax, 6)
   }
 
   static valueFor(transaction) {
-    return parseFloat((transaction.price * transaction.fraction).toFixed(2))
+    const value = transaction.price * transaction.fraction
+    return _.round(value, 6)
   }
 }
 

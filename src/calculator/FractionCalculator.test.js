@@ -9,8 +9,8 @@ describe('Fraction Calculator', () => {
   
     const calculatedTransaction = {
       ...transaction,
-      fraction_tax: 0.46,
-      fraction_value: 504.43
+      fraction_tax: 0.460800,
+      fraction_value: 504.432000
     }
 
     expect(result).toEqual(calculatedTransaction);

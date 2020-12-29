@@ -5,7 +5,7 @@ import data from './mockData'
 describe('TD Calculator', () => {
   test('gives median for 1 investiment', () => {
     const calc = new Calculator()
-    calc.invest(data[0])
+    calc.add(data[0])
     const response = calc.median()
   
     const expectedMedian = {
