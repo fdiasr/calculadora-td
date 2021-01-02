@@ -12,26 +12,30 @@ class Calculator {
   }
 
   median() {
-    const fractions = _.map(this.transactions, item => FractionCalculator.for(item))
+    const fractions = _.map(this.transactions, this.calculateFraction)
+    const quantity = _.round(this.calculateTotalQuantity(fractions), 2)
+
     return {
-      quantity: this.calculateTotalQuantity(fractions),
-      tax: this.calculateMedianTax(fractions),
-      price: this.calculateMedianPrice(fractions)
+      quantity,
+      tax: this.calculateMedianTax(fractions, quantity),
+      price: this.calculateMedianPrice(fractions, quantity)
     }
+  }
+
+  calculateFraction(transaction) {
+    return FractionCalculator.for(transaction)
   }
 
   calculateTotalQuantity(fractions) {
     return _.sumBy(fractions, item => item.fraction)
   }
 
-  calculateMedianTax(fractions) {
-    const quantity = this.calculateTotalQuantity(fractions)
+  calculateMedianTax(fractions, quantity) {
     const tax = _.sumBy(fractions, item => item.fraction_tax) / quantity
     return _.round(tax, 2)
   }
 
-  calculateMedianPrice(fractions) {
-    const quantity = this.calculateTotalQuantity(fractions)
+  calculateMedianPrice(fractions, quantity) {
     const price = _.sumBy(fractions, item => item.fraction_value) / quantity
     return _.round(price, 2)
   }
