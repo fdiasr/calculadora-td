@@ -10,7 +10,7 @@ const TransactionsReducer = (state, action) => {
     case 'ADD':
       return {
         ...state,
-        transactions: state.transactions.concat(defaultTransaction)
+        transactions: state.transactions.concat(action.payload)
       }
     case 'REMOVE':
       return {
