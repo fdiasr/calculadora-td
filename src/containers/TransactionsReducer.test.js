@@ -5,11 +5,10 @@ import data from '../calculator/mockData'
 // TODO move it to be imported into real code
 const initialState = { transactions: [] }
 
-describe('Transactions Reducer', () => {
-  // beforeEach(() => {
-  //   reducer(initialState, { type: 'SET', payload: [] })
-  // })
+// default transaciont
+// const defaultTransaction = { date: '2021-01-01', price: 0, tax: 0, fraction: 0 }
 
+describe('Transactions Reducer', () => {
   test('runs SET action type', () => {
     const state = reducer(initialState, { type: 'SET', payload: data })
     
@@ -25,23 +24,19 @@ describe('Transactions Reducer', () => {
     expect(finalState.transactions).toEqual(expectedTransactions)
   })
 
-  test.skip('runs REMOVE action type', () => {
-    const firstState = reducer(initialState, { type: 'ADD', payload: data })
+  test('runs REMOVE action type', () => {
+    const firstState = reducer(initialState, { type: 'SET', payload: data })
     
-    const state = reducer({ type: 'REMOVE', id: '001' })
+    const state = reducer(firstState, { type: 'REMOVE', payload: 'hash-001' })
+    
+    expect(state.transactions).toHaveLength(10)
+  })
+
+  test('runs DEFAULt action using undefined action type', () => {
+    const firstState = reducer(initialState, { type: 'ADD', payload: data[0] })
+    
+    const state = reducer(firstState, { type: 'unknown' })
     
     expect(state.transactions).toHaveLength(1)
-  })
-
-  test.skip('runs DEFAULt action returning empty state', () => {
-    const state = reducer()
-    
-    expect(state.transactions).toHaveLength(0)
-  })
-
-  test.skip('runs DEFAULt action using undefined action type', () => {
-    const state = reducer(initialState, { type: 'unknown' })
-    
-    expect(state.transactions).toHaveLength(0)
   })
 })

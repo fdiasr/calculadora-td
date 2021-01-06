@@ -1,4 +1,4 @@
-const defaultTransaction = { date: '2021-01-01', price: 0, tax: 0, fraction: 0 }
+import _ from 'lodash'
 
 const TransactionsReducer = (state, action) => {
   switch (action.type) {
