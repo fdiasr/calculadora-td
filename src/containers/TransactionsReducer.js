@@ -1,19 +1,31 @@
-const TransactionsReducer = (state, action) => {
-  switch (action.type) {
+const isEqual = (transaction, payload) => transaction.id === payload.id
+
+const updateTransaction = (transaction, payload) => {
+  return isEqual(transaction, payload) ? payload : transaction
+}
+
+const TransactionsReducer = (state, {type, payload}) => {
+  switch (type) {
     case 'SET':
       return {
         ...state,
-        transactions: action.payload
+        transactions: payload
       }
     case 'ADD':
       return {
         ...state,
-        transactions: state.transactions.concat(action.payload)
+        transactions: state.transactions.concat(payload)
+      }
+    case 'UPDATE':
+      const updatedTransactions = state.transactions.map(transaction => updateTransaction(transaction, payload))
+      return {
+        ...state,
+        transactions: updatedTransactions
       }
     case 'REMOVE':
       return {
         ...state,
-        transactions: state.transactions.filter(transaction => transaction.id !== action.payload.id)
+        transactions: state.transactions.filter(transaction => !isEqual(transaction, payload))
       }
     default:
       return state

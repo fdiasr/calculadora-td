@@ -26,6 +26,10 @@ const CompletedTransactions = () => {
     dispatch({ type: 'REMOVE', payload: { id } })
   }
 
+  const changeCallback = transaction => {
+    dispatch({ type: 'UPDATE', payload: transaction })
+  }
+
   return (
     <div>
       <h1>Aportes Realizados</h1>
@@ -35,7 +39,9 @@ const CompletedTransactions = () => {
       <TransactionsList 
         transactions={state.transactions}
         addCallback={addCallback}
-        removeCallback={removeCallback} />
+        removeCallback={removeCallback}
+        changeCallback={changeCallback}
+      />
     </div>
   )
 }

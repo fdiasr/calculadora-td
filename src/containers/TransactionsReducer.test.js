@@ -3,7 +3,7 @@ import reducer from './TransactionsReducer'
 import data from '../calculator/mockData'
 
 // TODO move it to be imported into real code
-const initialState = { transactions: [] }
+const initialState = { type: null, transactions: [] }
 
 describe('Transactions Reducer', () => {
   test('runs SET action type', () => {
@@ -27,6 +27,18 @@ describe('Transactions Reducer', () => {
     const state = reducer(firstState, { type: 'REMOVE', payload: { id: 'hash-001' } })
     
     expect(state.transactions).toHaveLength(10)
+  })
+
+  test('runs UPDATE action type', () => {
+    const firstState = reducer(initialState, { type: 'SET', payload: data })
+
+    const updatedTransaction = { ...data[6], price: 2854.16, tax: 2.61 }
+    const state = reducer(firstState, { type: 'UPDATE', payload: updatedTransaction })
+
+    const expectedTransactions = data.map(item => ({ ...item }))
+    expectedTransactions[6]['price'] = 2854.16
+    expectedTransactions[6]['tax'] = 2.61
+    expect(state.transactions).toEqual(expectedTransactions)
   })
 
   test('runs DEFAULt action using undefined action type', () => {

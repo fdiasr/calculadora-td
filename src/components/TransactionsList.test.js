@@ -12,7 +12,8 @@ let transactionsList = null
 const props = {
   transactions: mockedData,
   addCallback: jest.fn(),
-  removeCallback: jest.fn()
+  removeCallback: jest.fn(),
+  changeCallback: jest.fn()
 }
 
 describe('Transactions List component', () => {
@@ -22,6 +23,7 @@ describe('Transactions List component', () => {
   beforeEach(() => {
     props.addCallback.mockReset()
     props.removeCallback.mockReset()
+    props.changeCallback.mockReset()
   })
 
   test('renders Transaction Header component', () => {

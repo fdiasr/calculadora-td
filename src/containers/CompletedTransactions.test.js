@@ -40,9 +40,35 @@ describe('Completed Transactions component', () => {
       completedTransactions.find('.addTransaction').simulate('click')
       expect(completedTransactions.find(Transaction)).toHaveLength(3)
     })
-    test('remove second item', () => {
+    test('remove third item', () => {
       completedTransactions.find('.removeTransaction').at(1).simulate('click')
       expect(completedTransactions.find(Transaction)).toHaveLength(2)
+    })
+    test('add a new third item', () => {
+      completedTransactions.find('.addTransaction').simulate('click')
+      expect(completedTransactions.find(Transaction)).toHaveLength(3)
+    })
+    test('add fourfht item', () => {
+      completedTransactions.find('.addTransaction').simulate('click')
+      expect(completedTransactions.find(Transaction)).toHaveLength(4)
+    })
+  })
+
+  describe('changes values of Transaction List items', () => {
+    test('change date of first transaction', () => {
+      
+    })
+
+    test('change price of second transaction', () => {
+
+    })
+
+    test('change tax of third transaction', () => {
+
+    })
+
+    test('change fraction of fourth transaction', () => {
+
     })
   })
 })
