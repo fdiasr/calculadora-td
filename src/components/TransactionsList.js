@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types'
-import { v4 as uuidv4 } from 'uuid'
 
 import TransactionsHeader from './TransactionsHeader'
 import Transaction from './Transaction'
 
 const buildTransaction = (transaction, removeCallback) => {
   return (
-    <li key={uuidv4()}>
+    <li key={transaction.id}>
       <Transaction {...transaction} />
-      <button className='removeTransaction' onClick={removeCallback}>Remover</button>
+      <button className='removeTransaction' onClick={() => removeCallback(transaction.id)}>Remover</button>
     </li>
   )
 }

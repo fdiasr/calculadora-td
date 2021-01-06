@@ -24,7 +24,7 @@ describe('Completed Transactions component', () => {
     })  
   })
 
-  describe.skip('manipulates Transaction List', () => {
+  describe('manipulates Transaction List', () => {
     test('validate ZERO items', () => {
       expect(completedTransactions.find(Transaction)).toHaveLength(0)
     })
@@ -40,8 +40,9 @@ describe('Completed Transactions component', () => {
       completedTransactions.find('.addTransaction').simulate('click')
       expect(completedTransactions.find(Transaction)).toHaveLength(3)
     })
-    test.skip('remove second item', () => {
-      // expect(state.transactions).toHaveLength(2)
+    test('remove second item', () => {
+      completedTransactions.find('.removeTransaction').at(1).simulate('click')
+      expect(completedTransactions.find(Transaction)).toHaveLength(2)
     })
   })
 })

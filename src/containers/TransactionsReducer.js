@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 const TransactionsReducer = (state, action) => {
   switch (action.type) {
     case 'SET':
@@ -15,7 +13,7 @@ const TransactionsReducer = (state, action) => {
     case 'REMOVE':
       return {
         ...state,
-        transactions: state.transactions.filter(transaction => transaction.id !== action.payload)
+        transactions: state.transactions.filter(transaction => transaction.id !== action.payload.id)
       }
     default:
       return state

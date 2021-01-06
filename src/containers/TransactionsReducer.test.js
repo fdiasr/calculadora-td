@@ -5,9 +5,6 @@ import data from '../calculator/mockData'
 // TODO move it to be imported into real code
 const initialState = { transactions: [] }
 
-// default transaciont
-// const defaultTransaction = { date: '2021-01-01', price: 0, tax: 0, fraction: 0 }
-
 describe('Transactions Reducer', () => {
   test('runs SET action type', () => {
     const state = reducer(initialState, { type: 'SET', payload: data })
@@ -27,7 +24,7 @@ describe('Transactions Reducer', () => {
   test('runs REMOVE action type', () => {
     const firstState = reducer(initialState, { type: 'SET', payload: data })
     
-    const state = reducer(firstState, { type: 'REMOVE', payload: 'hash-001' })
+    const state = reducer(firstState, { type: 'REMOVE', payload: { id: 'hash-001' } })
     
     expect(state.transactions).toHaveLength(10)
   })
