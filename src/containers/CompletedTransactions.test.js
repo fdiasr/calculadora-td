@@ -8,7 +8,7 @@ import CompletedTransactions from './CompletedTransactions'
 let completedTransactions = null
 
 describe('Completed Transactions component', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     completedTransactions = mount(<CompletedTransactions />)
   })
 
@@ -28,47 +28,118 @@ describe('Completed Transactions component', () => {
     test('validate ZERO items', () => {
       expect(completedTransactions.find(Transaction)).toHaveLength(0)
     })
-    test('add first item', () => {
+
+    test('add one item', () => {
       completedTransactions.find('.addTransaction').simulate('click')
+
       expect(completedTransactions.find(Transaction)).toHaveLength(1)
     })
-    test('add second item', () => {
+
+    test('add two items', () => {
       completedTransactions.find('.addTransaction').simulate('click')
+      completedTransactions.find('.addTransaction').simulate('click')
+
       expect(completedTransactions.find(Transaction)).toHaveLength(2)
     })
-    test('add third item', () => {
+
+    test('remove one of items', () => {
       completedTransactions.find('.addTransaction').simulate('click')
-      expect(completedTransactions.find(Transaction)).toHaveLength(3)
-    })
-    test('remove third item', () => {
+      completedTransactions.find('.addTransaction').simulate('click')
+
       completedTransactions.find('.removeTransaction').at(1).simulate('click')
+
+      expect(completedTransactions.find(Transaction)).toHaveLength(1)
+    })
+
+    test('add a new item, after remove one', () => {
+      completedTransactions.find('.addTransaction').simulate('click')
+      completedTransactions.find('.addTransaction').simulate('click')
+      completedTransactions.find('.removeTransaction').at(1).simulate('click')
+
+      completedTransactions.find('.addTransaction').simulate('click')
+
       expect(completedTransactions.find(Transaction)).toHaveLength(2)
-    })
-    test('add a new third item', () => {
-      completedTransactions.find('.addTransaction').simulate('click')
-      expect(completedTransactions.find(Transaction)).toHaveLength(3)
-    })
-    test('add fourfht item', () => {
-      completedTransactions.find('.addTransaction').simulate('click')
-      expect(completedTransactions.find(Transaction)).toHaveLength(4)
     })
   })
 
+  const findTransactionIdByIndex = index => {
+    return completedTransactions
+    .find(TransactionsList)
+    .find('li')
+    .at(index)
+    .key()
+  }
+
+  const getFieldSelector = fieldName => `.input_${fieldName}`
+
+  const update = (transactionId, fieldName, value) => {
+    completedTransactions
+      .find({ 'data-transaction-id': transactionId})
+      .find(getFieldSelector(fieldName))
+      .at(0)
+      .simulate('change', { target: { name: fieldName, value } })
+  }
+
+  const get = (transactionId, fieldName) => {
+    return completedTransactions
+      .find({ 'data-transaction-id': transactionId})
+      .find(getFieldSelector(fieldName))
+      .get(0)
+  }
+
   describe('changes values of Transaction List items', () => {
     test('change date of first transaction', () => {
+      completedTransactions.find('.addTransaction').simulate('click')
+      const transactionId = findTransactionIdByIndex(0)
+      const fieldName = 'date'
+      const newValue = '2021-01-05'
       
+      update(transactionId, fieldName, newValue)
+
+      const field = get(transactionId, fieldName)
+      expect(field.props.value).toBe(newValue)
     })
 
     test('change price of second transaction', () => {
+      completedTransactions.find('.addTransaction').simulate('click')
+      completedTransactions.find('.addTransaction').simulate('click')
+      const transactionId = findTransactionIdByIndex(1)
+      const fieldName = 'price'
+      const newValue = 2666.50
+      
+      update(transactionId, fieldName, newValue)
 
+      const field = get(transactionId, fieldName)
+      expect(field.props.value).toBe(newValue)
     })
 
     test('change tax of third transaction', () => {
+      completedTransactions.find('.addTransaction').simulate('click')
+      completedTransactions.find('.addTransaction').simulate('click')
+      completedTransactions.find('.addTransaction').simulate('click')
+      const transactionId = findTransactionIdByIndex(2)
+      const fieldName = 'tax'
+      const newValue = 2.65
+      
+      update(transactionId, fieldName, newValue)
 
+      const field = get(transactionId, fieldName)
+      expect(field.props.value).toBe(newValue)
     })
 
     test('change fraction of fourth transaction', () => {
+      completedTransactions.find('.addTransaction').simulate('click')
+      completedTransactions.find('.addTransaction').simulate('click')
+      completedTransactions.find('.addTransaction').simulate('click')
+      completedTransactions.find('.addTransaction').simulate('click')
+      const transactionId = findTransactionIdByIndex(3)
+      const fieldName = 'fraction'
+      const newValue = 0.18
+      
+      update(transactionId, fieldName, newValue)
 
+      const field = get(transactionId, fieldName)
+      expect(field.props.value).toBe(newValue)
     })
   })
 })

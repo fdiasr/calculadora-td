@@ -11,7 +11,7 @@ const Transaction = ({ id, date, price, tax, fraction, changeCallback }) => {
   }
 
   return (
-    <div>
+    <div data-id={`transactionId-${id}`}>
       <input name='date' className='input_date' onChange={handleOnChange} value={date} />
       <input name='price' className='input_price' onChange={handleOnChange} value={price} />
       <input name='tax' className='input_tax' onChange={handleOnChange} value={tax} />

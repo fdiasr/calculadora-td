@@ -5,7 +5,7 @@ import Transaction from './Transaction'
 
 const buildTransaction = (transaction, removeCallback, changeCallback) => {
   return (
-    <li key={transaction.id}>
+    <li data-transaction-id={transaction.id} key={transaction.id}>
       <Transaction {...transaction} changeCallback={changeCallback} />
       <button className='removeTransaction' onClick={() => removeCallback(transaction.id)}>Remover</button>
     </li>
