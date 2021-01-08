@@ -1,15 +1,17 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
+import { Provider } from './stores'
+import CompletedTransactions from './CompletedTransactions'
+
 import Transaction from '../components/Transaction'
 import TransactionsList from '../components/TransactionsList'
-import CompletedTransactions from './CompletedTransactions'
 
 let completedTransactions = null
 
 describe('Completed Transactions component', () => {
   beforeEach(() => {
-    completedTransactions = mount(<CompletedTransactions />)
+    completedTransactions = mount(<Provider><CompletedTransactions /></Provider>)
   })
 
   describe('renders', () => {

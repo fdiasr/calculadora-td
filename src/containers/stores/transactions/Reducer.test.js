@@ -1,6 +1,6 @@
-import reducer from './TransactionsReducer'
+import reducer from './Reducer'
 
-import data from '../calculator/mockData'
+import data from '../../../calculator/mockData'
 
 // TODO move it to be imported into real code
 const initialState = { type: null, transactions: [] }

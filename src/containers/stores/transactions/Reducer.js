@@ -4,7 +4,7 @@ const updateTransaction = (transaction, payload) => {
   return isEqual(transaction, payload) ? payload : transaction
 }
 
-const TransactionsReducer = (state, {type, payload}) => {
+const Reducer = (state, {type, payload}) => {
   switch (type) {
     case 'SET':
       return {
@@ -32,4 +32,4 @@ const TransactionsReducer = (state, {type, payload}) => {
   }
 }
 
-export default TransactionsReducer
+export default Reducer

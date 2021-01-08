@@ -1,22 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+
+import { Provider } from './containers/stores'
+import CompletedTransactions from './containers/CompletedTransactions'
+import SummaryTransactions from './containers/SummaryTransactions'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Provider>
+          <CompletedTransactions />
+          <SummaryTransactions />
+        </Provider>
       </header>
     </div>
   );
