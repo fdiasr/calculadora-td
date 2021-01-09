@@ -1,14 +1,23 @@
 import PropTypes from 'prop-types'
+import IconButton from '@material-ui/core/IconButton';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import TransactionsHeader from './TransactionsHeader'
 import Transaction from './Transaction'
 
 const buildTransaction = (transaction, removeCallback, changeCallback) => {
   return (
-    <li data-transaction-id={transaction.id} key={transaction.id}>
+    <div data-transaction-id={transaction.id} key={transaction.id} className="transaction-item" >
+      <div className="transaction-item-actions">
+        {/* <button className='transaction-item-remove' onClick={() => removeCallback(transaction.id)}>Remover</button> */}
+        <IconButton aria-label="Delete" className='transaction-item-remove' onClick={() => removeCallback(transaction.id)} >
+          <DeleteIcon />
+        </IconButton>
+
+      </div>
       <Transaction {...transaction} changeCallback={changeCallback} />
-      <button className='removeTransaction' onClick={() => removeCallback(transaction.id)}>Remover</button>
-    </li>
+    </div>
   )
 }
 
@@ -16,10 +25,14 @@ const TransactionsList = ({ transactions, addCallback, removeCallback, changeCal
   return (
     <div>
       <TransactionsHeader />
-      <ul>
-        { transactions.map(transaction => buildTransaction(transaction, removeCallback, changeCallback)) }
-      </ul>
-      <button className='addTransaction' onClick={addCallback}>Adicionar</button>
+      { transactions.map(transaction => buildTransaction(transaction, removeCallback, changeCallback)) }
+      {/* <button className='addTransaction' onClick={addCallback}>Adicionar</button> */}
+      <div className="transactions-bottom">
+        <IconButton aria-label="Adicionar" className="transaction-item-add" onClick={addCallback} >
+          <AddBoxIcon />
+        </IconButton>
+      </div>
+
     </div>
   )
 }

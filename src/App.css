@@ -1,38 +1,44 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  background-color: ghostwhite;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
-.App-link {
-  color: #61dafb;
+.completed-transactions {
+  background-color: rgb(253, 253, 253);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.transactions-header, .transaction-item {
+  display: flex;
 }
+
+.transactions-header-data, .transaction-item-data {
+  display: flex;
+  width: 95%;
+}
+.transactions-header-actions, .transaction-item-actions { 
+  display: flex;
+  width: 5%;
+}
+
+.transactions-header-date, .transaction-item-date { width: 20%; }
+.transactions-header-price, .transaction-item-price { width: 20%; }
+.transactions-header-tax, .transaction-item-tax { width: 10%; }
+.transactions-header-fraction, .transaction-item-fraction { width: 15%; }
+.transactions-header-fraction-tax, .transaction-item-fraction-tax { width: 15%; }
+.transactions-header-fraction-price, .transaction-item-fraction-price { width: 20%; }
+
+.transaction-item input { width: 80%; text-align: right; }
+
+.transaction-item-date  { vertical-align: middle; }
+.transaction-item-date input { width: 100%; }
+
+.add-bottom { padding-bottom: 50px; }
+
+.transactions-bottom { text-align: left; }

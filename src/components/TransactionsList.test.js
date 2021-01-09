@@ -33,19 +33,19 @@ describe('Transactions List component', () => {
     expect(transactionsList.find(Transaction)).toHaveLength(11)
   })
   test('renders remove button for each transaction from list', () => {
-    expect(transactionsList.find('.removeTransaction')).toHaveLength(11)
+    expect(transactionsList.find('.transaction-item-remove')).toHaveLength(11)
   })
   test('renders add button for a new transaction item', () => {
-    expect(transactionsList.find('.addTransaction')).toHaveLength(1)
+    expect(transactionsList.find('.transaction-item-add')).toHaveLength(1)
   })
 
   test('execute callback to add new transaction', () => {
-    transactionsList.find('.addTransaction').simulate('click')
+    transactionsList.find('.transaction-item-add').simulate('click')
     expect(props.addCallback).toHaveBeenCalledTimes(1)
   })
 
   test('execute callback to remove selected transaction', () => {
-    transactionsList.find('.removeTransaction').at(0).simulate('click')
+    transactionsList.find('.transaction-item-remove').at(0).simulate('click')
     expect(props.removeCallback).toHaveBeenCalledTimes(1)
   })
 })

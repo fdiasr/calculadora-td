@@ -29,10 +29,10 @@ const CompletedTransactions = () => {
   }
 
   return (
-    <div>
-      <h1>Aportes Realizados</h1>
+    <div className="completed-transactions">
+      <h2>Aportes Realizados</h2>
 
-      <div className='tools'>IMPORTAR/EXPORTAR</div>
+      {/* <div className='tools'>IMPORTAR/EXPORTAR</div> */}
 
       <TransactionsList 
         transactions={state.transactions}

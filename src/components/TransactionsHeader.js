@@ -1,12 +1,15 @@
 const TransactionsHeader = () => {
   return (
-    <div>
-      <div className='title'>Data</div>
-      <div className='title'>Preço da Compra</div>
-      <div className='title'>Taxa da Compra</div>
-      <div className='title'>Fração</div>
-      <div className='title'>% Fração</div>
-      <div className='title'>Valor Fração</div>
+    <div className="transactions-header">
+      <div className='transactions-header-actions'>[]</div>
+      <div className='transactions-header-data'>
+        <div className='transactions-header-date'>Data</div>
+        <div className='transactions-header-price'>Preço da Compra</div>
+        <div className='transactions-header-tax'>Taxa da Compra</div>
+        <div className='transactions-header-fraction'>Fração</div>
+        <div className='transactions-header-fraction-tax'>% Fração</div>
+        <div className='transactions-header-fraction-price'>Valor Fração</div>
+      </div>
     </div>
   )
 }

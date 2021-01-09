@@ -1,8 +1,11 @@
 import { 
-  Provider, 
+  Provider,
+  Reducer,
   TransactionsContext, 
   TransactionUseContext, 
   defaultTransaction 
 } from './transactions'
 
-export { Provider, TransactionsContext, TransactionUseContext, defaultTransaction }
+export { Provider, Reducer, TransactionsContext, TransactionUseContext, defaultTransaction }
+
+export default TransactionUseContext

@@ -1,3 +1,5 @@
+import { Grid } from '@material-ui/core';
+
 import './App.css';
 
 import { Provider } from './containers/stores'
@@ -8,11 +10,20 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Provider>
-          <CompletedTransactions />
-          <SummaryTransactions />
-        </Provider>
+        <h1>Calculadora TD</h1>
       </header>
+
+      <Provider>
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
+            <CompletedTransactions />
+          </Grid>
+          <Grid item xs={4}>
+            <SummaryTransactions />
+          </Grid>
+        </Grid>
+      </Provider>
+
     </div>
   );
 }
