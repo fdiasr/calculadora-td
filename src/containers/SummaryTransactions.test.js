@@ -5,11 +5,13 @@ import { Provider } from './stores/transactions'
 
 import SummaryTransactions from './SummaryTransactions'
 
+import data from '../calculator/mockData'
+
 let summaryTransactions = null
 
 describe('Completed Transactions component', () => {
   beforeEach(() => {
-    summaryTransactions = mount(<Provider><SummaryTransactions /></Provider>)
+    summaryTransactions = mount(<Provider initialState={{ transactions: data }}><SummaryTransactions /></Provider>)
   })
 
   describe('renders', () => {
@@ -35,13 +37,16 @@ describe('Completed Transactions component', () => {
 
   describe('calculates summary', () => {
     test('for Total Quantity', () => {
-      expect(summaryTransactions.find('.total-quantity-value').text()).toEqual(0)
+      expect(summaryTransactions.find('.total-quantity-value').text()).toEqual("1.96")
     })
-    test.skip('tools component', () => {
-      expect(summaryTransactions.find('.median-tax-value').text()).toEqual(10)
+    test('for Median Quantity', () => {
+      expect(summaryTransactions.find('.median-quantity-value').text()).toEqual("0.18")
     })
-    test.skip('Transactions List component', () => {
-      expect(summaryTransactions.find('.median-price-value').text()).toEqual(10)
+    test('for Median Tax', () => {
+      expect(summaryTransactions.find('.median-tax-value').text()).toEqual("2.8")
+    })
+    test('for Median Price', () => {
+      expect(summaryTransactions.find('.median-price-value').text()).toEqual("2808.49")
     })  
   })
 })

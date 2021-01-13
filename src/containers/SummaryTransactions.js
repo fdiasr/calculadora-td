@@ -2,25 +2,22 @@ import React from "react";
 import _ from "lodash";
 
 import TransactionUseContext from './stores'
+import Calculator from "../calculator/Calculator";
 
 const SummaryTransactions = () => {
 
   const { state } = TransactionUseContext()
 
+  const calc = new Calculator(state.transactions)
+
+  const median = calc.median()
+
   const getTotalQuantity = transactions => {
-    // _.reduce(transactions, (sum, t) => sum + _.parse(t.fraction), 0)
-    console.log(transactions)
-    return 0
+    const totalQuantity = _.reduce(transactions, (sum, t) => sum + t.fraction, 0)
+    return _.round(totalQuantity, 2)
   }
-  const getMedianTax = transactions => {
-    const fractionSum = getTotalQuantity(transactions)
-    if (fractionSum <= 0) {
-      return 0
-    }
-    const taxSum = _.reduce(transactions, (sum, t) => sum + t.fraction * t.tax, 0)
-    return _.round(fractionSum / taxSum, 2)
-  }
-  const getMedianValue = transactions => 0
+
+  const totalQuantity = getTotalQuantity(state.transactions)
 
   return (
     <div>
@@ -29,15 +26,19 @@ const SummaryTransactions = () => {
         <tbody>
           <tr>
             <td className="total-quantity-label">Quantidade:</td>
-            <td className="total-quantity-value">{ getTotalQuantity(state.transactions) }</td>
+            <td className="total-quantity-value">{ totalQuantity }</td>
+          </tr>
+          <tr>
+            <td className="median-quantity-label">Fração Mediana:</td>
+            <td className="median-quantity-value">{ median.quantity }</td>
           </tr>
           <tr>
             <td className="median-tax-label">Taxa Mediana:</td>
-            <td className="median-tax-value">{ getMedianTax() }</td>
+            <td className="median-tax-value">{ median.tax }</td>
           </tr>
           <tr>
-            <td className="median-price-label">Valor Mediano:</td>
-            <td className="median-price-value">{ getMedianValue() }</td>
+            <td className="median-price-label">Preço Mediano:</td>
+            <td className="median-price-value">{ median.price }</td>
           </tr>
         </tbody>
       </table>
