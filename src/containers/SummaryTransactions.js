@@ -1,12 +1,12 @@
 import React from "react";
 import _ from "lodash";
 
-import TransactionUseContext from './stores'
+import { TransactionsUseContext } from './stores'
 import Calculator from "../calculator/Calculator";
 
 const SummaryTransactions = () => {
 
-  const { state } = TransactionUseContext()
+  const { state } = TransactionsUseContext()
 
   const calc = new Calculator(state.transactions)
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import { Provider } from './stores'
+import { Provider } from './stores/transactions'
 import CompletedTransactions from './CompletedTransactions'
 
 import Transaction from '../components/Transaction'
@@ -19,9 +19,6 @@ describe('Completed Transactions component', () => {
   describe('renders', () => {
     test('title element', () => {
       expect(completedTransactions.find('h2')).toHaveLength(1)
-    })
-    test.skip('tools component', () => {
-      expect(completedTransactions.find('.tools')).toHaveLength(1)
     })
     test('Transactions List component', () => {
       expect(completedTransactions.find(TransactionsList)).toHaveLength(1)

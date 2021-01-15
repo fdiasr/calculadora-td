@@ -6,7 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import TransactionsHeader from './TransactionsHeader'
 import Transaction from './Transaction'
 
-const buildTransaction = (transaction, removeCallback, changeCallback) => {
+const buildTransaction = (transaction, removeCallback, changeCallback, isFutureTransaction) => {
   return (
     <div data-transaction-id={transaction.id} key={transaction.id} className="transaction-item" >
       <div className="transaction-item-actions">
@@ -16,16 +16,16 @@ const buildTransaction = (transaction, removeCallback, changeCallback) => {
         </IconButton>
 
       </div>
-      <Transaction {...transaction} changeCallback={changeCallback} />
+      <Transaction {...transaction} changeCallback={changeCallback} isFutureTransaction={isFutureTransaction} />
     </div>
   )
 }
 
-const TransactionsList = ({ transactions, addCallback, removeCallback, changeCallback }) => {
+const TransactionsList = ({ transactions, addCallback, removeCallback, changeCallback, isFutureTransaction }) => {
   return (
     <div>
       <TransactionsHeader />
-      { transactions.map(transaction => buildTransaction(transaction, removeCallback, changeCallback)) }
+      { transactions.map(transaction => buildTransaction(transaction, removeCallback, changeCallback, isFutureTransaction)) }
       {/* <button className='addTransaction' onClick={addCallback}>Adicionar</button> */}
       <div className="transactions-bottom">
         <IconButton aria-label="Adicionar" className="transaction-item-add" onClick={addCallback} >

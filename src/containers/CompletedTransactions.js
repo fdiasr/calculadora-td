@@ -2,13 +2,13 @@ import React from "react";
 import { v4 as uuidv4 } from 'uuid'
 // import React, { useEffect } from "react";
 
-import { TransactionUseContext, defaultTransaction } from './stores'
+import { TransactionsUseContext, defaultTransaction } from './stores'
 
 import { TransactionsList } from '../components'
 
 const CompletedTransactions = () => {
 
-  const { state, dispatch } = TransactionUseContext()
+  const { state, dispatch } = TransactionsUseContext()
 
   // useEffect(() => {
   //   console.log('use effect ?????')

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 
-const Transaction = ({ id, date, price, tax, fraction, changeCallback }) => {
+const Transaction = ({ id, date, price, tax, fraction, changeCallback, isFutureTransaction }) => {
 
   const getValues = () =>  ({ id, date, price, tax, fraction })
 
@@ -21,6 +21,7 @@ const Transaction = ({ id, date, price, tax, fraction, changeCallback }) => {
           name="date"
           value={date}
           onChange={handleOnChange}
+          disabled={isFutureTransaction}
           InputLabelProps={{
             shrink: true,
           }}
@@ -28,7 +29,7 @@ const Transaction = ({ id, date, price, tax, fraction, changeCallback }) => {
         />
       </div>
       <div className="transaction-item-price">
-        <Input id='price' className='input_price' onChange={handleOnChange} value={price} />
+        <Input id='price' className='input_price' onChange={handleOnChange} value={price} readOnly={isFutureTransaction} />
       </div>
       <div className="transaction-item-tax">
         <Input id='tax' className='input_tax' onChange={handleOnChange} value={tax} />
@@ -37,10 +38,10 @@ const Transaction = ({ id, date, price, tax, fraction, changeCallback }) => {
         <Input id='fraction' className='input_fraction' onChange={handleOnChange} value={fraction} />
       </div>
       <div className="transaction-item-fraction-tax">
-        <Input id='fraction_tax' className='input_fraction_tax' onChange={handleOnChange} value={fraction * tax} readOnly />
+        <Input id='fraction_tax' className='input_fraction_tax' value={fraction * tax} readOnly />
       </div>
       <div className="transaction-item-fraction-price">
-        <Input id='fraction_price' className='input_fraction_price' onChange={handleOnChange} value={fraction * price} readOnly />
+        <Input id='fraction_price' className='input_fraction_price' value={fraction * price} readOnly />
       </div>
     </div>
   )
