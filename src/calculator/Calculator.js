@@ -45,12 +45,12 @@ class Calculator {
     return _.round(price, 2)
   }
 
-  predicts(taxes, quantity) {
-    return _.map(taxes, tax => this.predictsTax(tax, quantity))
+  predicts(futureTransactions) {
+    return _.map(futureTransactions, transaction => this.predictsTax(transaction))
   }
 
-  predictsTax(tax, quantity) {
-    const transactions = this.transactionsToPredictWith(tax, quantity)
+  predictsTax(futureTransaction) {
+    const transactions = this.predictionFor(futureTransaction)
 
     const fractions = _.map(transactions, this.calculateFraction)
     const totalQuantity = _.round(this.calculateTotalQuantity(fractions), 2)
@@ -58,14 +58,15 @@ class Calculator {
     return {
       totalQuantity,
       medianQuantity: this.calculateMedianQuantity(fractions, totalQuantity),
-      tax: this.calculateMedianTax(fractions, totalQuantity)
+      tax: this.calculateMedianTax(fractions, totalQuantity),
+      price: this.calculateMedianPrice(fractions, totalQuantity)
     }
   }
 
-  transactionsToPredictWith(tax, quantity) {
+  // change params to receive object and apply desctructing
+  predictionFor(futureTransaction) {
     const transactions = [...this.transactions]
-    const predictedTransaction = { tax: tax, fraction: quantity }
-    transactions.push(predictedTransaction)
+    transactions.push(futureTransaction)
     return transactions
   }
 }
