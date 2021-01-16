@@ -63,7 +63,7 @@ describe('Transaction component', () => {
   describe('handles with inputs onChange event', () => {
     test('executes callback with new values', () => {
       const input = getInputFrom('.transaction-item-price').at(0)
-      input.simulate('change', { target: { name: 'price', value: 2789.10 } })
+      input.simulate('change', { target: { id: 'price', value: 2789.10 } })
 
       const updatedValues = { ...defaultValues, price: 2789.10 }
       expect(changeCallback).toBeCalledWith(updatedValues)

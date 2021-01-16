@@ -73,7 +73,7 @@ describe('Completed Transactions component', () => {
 
   const update = (transactionId, fieldName, newValue) => {
     const element = completedTransactions.find({ 'data-id': transactionId}).find(`input#${fieldName}`)
-    element.simulate('change', { target: { name: fieldName, value: newValue } })
+    element.simulate('change', { target: { id: fieldName, value: newValue } })
   }
 
   const get = (transactionId, fieldName) => {

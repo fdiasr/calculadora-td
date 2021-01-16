@@ -2,9 +2,12 @@ import { Grid } from '@material-ui/core';
 
 import './App.css';
 
-import { Provider } from './containers/stores'
+import { Provider as TransactionProvider } from './containers/stores/transactions'
+import { Provider as FutureProvider } from './containers/stores/future'
 import CompletedTransactions from './containers/CompletedTransactions'
 import SummaryTransactions from './containers/SummaryTransactions'
+import FutureTransactions from './containers/FutureTransactions'
+import Predictions from './containers/Predictions'
 
 function App() {
   return (
@@ -13,7 +16,7 @@ function App() {
         <h1>Calculadora TD</h1>
       </header>
 
-      <Provider>
+      <TransactionProvider>
         <Grid container spacing={2}>
           <Grid item xs={8}>
             <CompletedTransactions />
@@ -22,8 +25,18 @@ function App() {
             <SummaryTransactions />
           </Grid>
         </Grid>
-      </Provider>
 
+        <FutureProvider>
+          <Grid container spacing={2}>
+            <Grid item xs={8}>
+              <FutureTransactions />
+            </Grid>
+            <Grid item xs={4}>
+              <Predictions />
+            </Grid>
+          </Grid>
+        </FutureProvider>
+      </TransactionProvider>
     </div>
   );
 }
