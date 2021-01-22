@@ -1,44 +1,44 @@
-import React from "react";
+import React  from "react"
 import _ from "lodash";
 import { v4 as uuidv4 } from 'uuid'
-import { DataGrid } from '@material-ui/data-grid';
+import { DataGrid } from '@material-ui/data-grid'
 
 import { TransactionsUseContext, FutureTransactionsUseContext } from './stores'
-import Calculator from "../calculator/Calculator";
+import Calculator from "../calculator/Calculator"
+
+const columns = [
+  { field: 'prediction-qtd', headerName: 'Qtde', width: 150 },
+  { field: 'prediction-tax', headerName: 'Taxa Mediana', width: 150 },
+  { field: 'prediction-price', headerName: 'Valor Mediana', width: 150 },
+]
+
+const format = ({ totalQuantity, tax, price }) => {
+  return {
+    id: uuidv4(),
+    'prediction-qtd': totalQuantity,
+    'prediction-tax': tax,
+    'prediction-price': price
+  }
+}
+
+const predicts = (currentTransactions, futureTransactions) => {
+  const calc = new Calculator(currentTransactions)
+  const predictions = calc.predicts(futureTransactions)
+  return _.map(predictions, prediction => format(prediction))
+}
 
 const SummaryTransactions = () => {
-
   const { state: transactionsState } = TransactionsUseContext()
   const { state: futureState } = FutureTransactionsUseContext()
 
-  const columns = [
-    { field: 'prediction-qtd', headerName: 'Qtde', width: 50 },
-    { field: 'prediction-tax', headerName: 'Taxa Mediana', width: 50 },
-    { field: 'prediction-price', headerName: 'Valor Mediana', width: 50 },
-  ];
-
-  const calc = new Calculator(transactionsState.transactions)
-
-  const predicts = futureTransactions => {
-    const predictions = calc.predicts(futureTransactions)
-
-    const format = ({ totalQuantity, tax, price }) => {
-      return {
-        id: uuidv4(),
-        'prediction-qtd': totalQuantity,
-        'prediction-tax': tax,
-        'prediction-price': price
-      }
-    }
-    return _.map(predictions, prediction => format(prediction))
-  }
-  
-  const rows = predicts(futureState.futureTransactions)
+  const rows = predicts(transactionsState.transactions, futureState.futureTransactions)
 
   return (
     <div>
       <h2>Predições</h2>
-        <DataGrid rows={rows} columns={columns} />
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid rows={rows} columns={columns} />
+        </div>
     </div>
   )
 }

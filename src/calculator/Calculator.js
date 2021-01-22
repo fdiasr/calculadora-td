@@ -31,18 +31,18 @@ class Calculator {
   }
 
   calculateMedianQuantity(fractions, totalQuantity) {
-    const quantity = totalQuantity / fractions.length
-    return _.round(quantity, 2)
+    const quantity = totalQuantity / _.defaultTo(fractions.length, 0)
+    return _.defaultTo(_.round(quantity, 2), 0)
   }
 
   calculateMedianTax(fractions, quantity) {
     const tax = _.sumBy(fractions, item => item.fraction_tax) / quantity
-    return _.round(tax, 2)
+    return _.defaultTo(_.round(tax, 2), 0)
   }
 
   calculateMedianPrice(fractions, quantity) {
     const price = _.sumBy(fractions, item => item.fraction_value) / quantity
-    return _.round(price, 2)
+    return _.defaultTo(_.round(price, 2), 0)
   }
 
   predicts(futureTransactions) {
