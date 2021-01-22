@@ -10,7 +10,6 @@ const buildTransaction = (transaction, removeCallback, changeCallback, isFutureT
   return (
     <div data-transaction-id={transaction.id} key={transaction.id} className="transaction-item" >
       <div className="transaction-item-actions">
-        {/* <button className='transaction-item-remove' onClick={() => removeCallback(transaction.id)}>Remover</button> */}
         <IconButton aria-label="Delete" className='transaction-item-remove' onClick={() => removeCallback(transaction.id)} >
           <DeleteIcon />
         </IconButton>
@@ -26,7 +25,6 @@ const TransactionsList = ({ transactions, addCallback, removeCallback, changeCal
     <div>
       <TransactionsHeader />
       { transactions.map(transaction => buildTransaction(transaction, removeCallback, changeCallback, isFutureTransaction)) }
-      {/* <button className='addTransaction' onClick={addCallback}>Adicionar</button> */}
       <div className="transactions-bottom">
         <IconButton aria-label="Adicionar" className="transaction-item-add" onClick={addCallback} >
           <AddBoxIcon />

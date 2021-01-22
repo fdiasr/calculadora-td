@@ -33,7 +33,6 @@ const FutureTransaction = () => {
         removeCallback={removeCallback}
         changeCallback={changeCallback}
         isFutureTransaction={true}
-
       />
     </div>
   )
