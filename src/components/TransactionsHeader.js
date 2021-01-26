@@ -1,7 +1,7 @@
 const TransactionsHeader = () => {
   return (
     <div className="transactions-header">
-      <div className='transactions-header-actions'>[]</div>
+      <div className='transactions-header-actions'>&nbsp;</div>
       <div className='transactions-header-data'>
         <div className='transactions-header-date'>Data</div>
         <div className='transactions-header-price'>Preço da Compra</div>

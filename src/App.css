@@ -6,16 +6,19 @@
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
-  font-size: calc(10px + 2vmin);
+  /* font-size: calc(10px + 2vmin); */
+  font-size: calc(10px + 1vmin);
   color: black;
+  margin: 20px;
 }
 
 .completed-transactions {
-  background-color: rgb(253, 253, 253);
+  /* background-color: rgb(253, 253, 253); */
 }
 
 .transactions-header, .transaction-item {
   display: flex;
+  vertical-align: bottom;
 }
 
 .transactions-header-data, .transaction-item-data {
@@ -25,6 +28,12 @@
 .transactions-header-actions, .transaction-item-actions { 
   display: flex;
   width: 5%;
+}
+
+.transactions-header {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .transactions-header-date, .transaction-item-date { width: 20%; }
