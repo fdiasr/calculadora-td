@@ -1,5 +1,6 @@
 import React from "react";
 import _ from "lodash";
+import { Box } from "@material-ui/core";
 
 import { TransactionsUseContext } from './stores'
 import Calculator from "../calculator/Calculator";
@@ -20,7 +21,7 @@ const SummaryTransactions = () => {
   const totalQuantity = getTotalQuantity(state.transactions)
 
   return (
-    <div>
+    <Box boxShadow={3}>
       <h2>Totalizadores</h2>
       <table>
         <tbody>
@@ -42,7 +43,7 @@ const SummaryTransactions = () => {
           </tr>
         </tbody>
       </table>
-    </div>
+    </Box>
   )
 }
 

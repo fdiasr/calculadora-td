@@ -1,6 +1,7 @@
 import React  from "react"
 import _ from "lodash";
 import { v4 as uuidv4 } from 'uuid'
+import { Box } from "@material-ui/core";
 import { DataGrid } from '@material-ui/data-grid'
 
 import { TransactionsUseContext, FutureTransactionsUseContext } from './stores'
@@ -34,12 +35,12 @@ const SummaryTransactions = () => {
   const rows = predicts(transactionsState.transactions, futureState.futureTransactions)
 
   return (
-    <div>
+    <Box boxShadow={3}>
       <h2>Predições</h2>
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid rows={rows} columns={columns} />
         </div>
-    </div>
+    </Box>
   )
 }
 

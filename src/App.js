@@ -17,7 +17,7 @@ function App() {
       </header>
 
       <TransactionProvider>
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
           <Grid item xs={8}>
             <CompletedTransactions />
           </Grid>
@@ -27,7 +27,7 @@ function App() {
         </Grid>
 
         <FutureProvider>
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
             <Grid item xs={8}>
               <FutureTransactions />
             </Grid>

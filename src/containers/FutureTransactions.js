@@ -1,5 +1,6 @@
 import React from "react"
 import { v4 as uuidv4 } from 'uuid'
+import { Container, Box } from "@material-ui/core"
 
 import { FutureTransactionsUseContext, futureTransaction } from './stores'
 
@@ -24,17 +25,19 @@ const FutureTransaction = () => {
   }
 
   return (
-    <div className="future-transactions">
-      <h2>Aportes Futuros</h2>
+    <Box boxShadow={3}>
+      <Container className="future-transactions">
+        <h2>Aportes Futuros</h2>
 
-      <TransactionsList 
-        transactions={state.futureTransactions}
-        addCallback={addCallback}
-        removeCallback={removeCallback}
-        changeCallback={changeCallback}
-        isFutureTransaction={true}
-      />
-    </div>
+        <TransactionsList 
+          transactions={state.futureTransactions}
+          addCallback={addCallback}
+          removeCallback={removeCallback}
+          changeCallback={changeCallback}
+          isFutureTransaction={true}
+        />
+      </Container>
+    </Box>
   )
 }
 

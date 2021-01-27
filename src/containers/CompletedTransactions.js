@@ -1,5 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from 'uuid'
+import { Container, Box } from "@material-ui/core";
 // import React, { useEffect } from "react";
 
 import { TransactionsUseContext, defaultTransaction } from './stores'
@@ -29,18 +30,20 @@ const CompletedTransactions = () => {
   }
 
   return (
-    <div className="completed-transactions">
-      <h2>Aportes Realizados</h2>
+    <Box boxShadow={3}>
+      <Container className="completed-transactions">
+        <h2>Aportes Realizados</h2>
 
-      {/* <div className='tools'>IMPORTAR/EXPORTAR</div> */}
+        {/* <div className='tools'>IMPORTAR/EXPORTAR</div> */}
 
-      <TransactionsList 
-        transactions={state.transactions}
-        addCallback={addCallback}
-        removeCallback={removeCallback}
-        changeCallback={changeCallback}
-      />
-    </div>
+        <TransactionsList 
+          transactions={state.transactions}
+          addCallback={addCallback}
+          removeCallback={removeCallback}
+          changeCallback={changeCallback}
+        />
+      </Container>
+    </Box>
   )
 }
 

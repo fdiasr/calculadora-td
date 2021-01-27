@@ -1,16 +1,14 @@
 .App {
   text-align: center;
-  background-color: ghostwhite;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
-  /* font-size: calc(10px + 2vmin); */
   font-size: calc(10px + 1vmin);
-  color: black;
-  margin: 20px;
+  margin: 0 50px;
 }
+
+h2 { color: darkgoldenrod; padding-top: 20px; }
 
 .completed-transactions {
   /* background-color: rgb(253, 253, 253); */
@@ -34,6 +32,10 @@
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 15px;
+}
+.transactions-header-data {
+  /* background-color: gainsboro; */
+  padding:10px;
 }
 
 .transactions-header-date, .transaction-item-date { width: 20%; }
