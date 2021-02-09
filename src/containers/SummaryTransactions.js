@@ -4,6 +4,7 @@ import { Box } from "@material-ui/core";
 
 import { TransactionsUseContext } from './stores'
 import Calculator from "../calculator/Calculator";
+import { DataGrid } from "@material-ui/data-grid";
 
 const SummaryTransactions = () => {
 
@@ -20,29 +21,24 @@ const SummaryTransactions = () => {
 
   const totalQuantity = getTotalQuantity(state.transactions)
 
+  const columns = [
+    { field: 'summary-label', headerName: '', width: 200, align: 'right', cellClassName: 'summary-cell' },
+    { field: 'summary-value', headerName: '', width: 200, type: 'number', cellClassName: 'summary-cell' },
+  ]
+  
+  const rows = [
+    { id: 'summary-quantity', 'summary-label': 'Quantidade', 'summary-value': totalQuantity },
+    { id: 'summary-median-quantity', 'summary-label': 'Fração Mediana', 'summary-value': median.quantity },
+    { id: 'summary-median-tax', 'summary-label': 'Taxa Mediana', 'summary-value': median.tax },
+    { id: 'summary-median-price', 'summary-label': 'Preço Mediano', 'summary-value': median.price },
+  ]
+
   return (
     <Box boxShadow={3}>
       <h2>Totalizadores</h2>
-      <table>
-        <tbody>
-          <tr>
-            <td className="total-quantity-label">Quantidade:</td>
-            <td className="total-quantity-value">{ totalQuantity }</td>
-          </tr>
-          <tr>
-            <td className="median-quantity-label">Fração Mediana:</td>
-            <td className="median-quantity-value">{ median.quantity }</td>
-          </tr>
-          <tr>
-            <td className="median-tax-label">Taxa Mediana:</td>
-            <td className="median-tax-value">{ median.tax }</td>
-          </tr>
-          <tr>
-            <td className="median-price-label">Preço Mediano:</td>
-            <td className="median-price-value">{ median.price }</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style={{ height: 210, width: '100%' }}>
+        <DataGrid rows={rows} columns={columns} headerHeight={0} hideFooter={true} className="summary-table" />
+      </div>
     </Box>
   )
 }

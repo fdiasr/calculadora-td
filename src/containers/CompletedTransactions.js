@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { v4 as uuidv4 } from 'uuid'
 import { Container, Box } from "@material-ui/core";
 // import React, { useEffect } from "react";
@@ -19,6 +20,7 @@ const CompletedTransactions = () => {
 
   const addCallback = () => {
     dispatch({ type: 'ADD', payload: newTransaction() })
+    // ReactDOM.findDOMNode()
   }
 
   const removeCallback = id => {

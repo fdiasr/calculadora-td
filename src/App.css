@@ -10,6 +10,15 @@
 
 h2 { color: darkgoldenrod; padding-top: 20px; }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
+input[type="number"] {
+   -moz-appearance: textfield;
+}
+
 .completed-transactions {
   /* background-color: rgb(253, 253, 253); */
 }
@@ -53,3 +62,9 @@ h2 { color: darkgoldenrod; padding-top: 20px; }
 .add-bottom { padding-bottom: 50px; }
 
 .transactions-bottom { text-align: left; }
+
+.summary-label, .summary-value { text-align: right; }
+.summary-cell { font-size: 1.4rem; }
+.prediction-cell { font-size: 1.2rem; }
+
+.summary-table .MuiDataGrid-cell { border-bottom: 0 !important; }

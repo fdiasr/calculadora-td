@@ -8,9 +8,9 @@ import { TransactionsUseContext, FutureTransactionsUseContext } from './stores'
 import Calculator from "../calculator/Calculator"
 
 const columns = [
-  { field: 'prediction-qtd', headerName: 'Qtde', width: 150 },
-  { field: 'prediction-tax', headerName: 'Taxa Mediana', width: 150 },
-  { field: 'prediction-price', headerName: 'Valor Mediana', width: 150 },
+  { field: 'prediction-qtd', headerName: 'Qtde', width: 150, align: 'right', cellClassName: 'prediction-cell' },
+  { field: 'prediction-tax', headerName: 'Taxa Mediana', width: 150, align: 'right', cellClassName: 'prediction-cell' },
+  { field: 'prediction-price', headerName: 'Valor Mediana', width: 150, align: 'right', cellClassName: 'prediction-cell' },
 ]
 
 const format = ({ totalQuantity, tax, price }) => {
@@ -38,7 +38,7 @@ const SummaryTransactions = () => {
     <Box boxShadow={3}>
       <h2>Predições</h2>
         <div style={{ height: 400, width: '100%' }}>
-          <DataGrid rows={rows} columns={columns} />
+          <DataGrid rows={rows} columns={columns} hideFooter={true} headerHeight={33} rowHeight={49} className="prediction-table" />
         </div>
     </Box>
   )
