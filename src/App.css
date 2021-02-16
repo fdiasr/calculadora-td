@@ -64,7 +64,9 @@ input[type="number"] {
 .transactions-bottom { text-align: left; }
 
 .summary-label, .summary-value { text-align: right; }
-.summary-cell { font-size: 1.4rem; }
-.prediction-cell { font-size: 1.2rem; }
+.summary-cell { font-size: 1.2rem; }
+.prediction-cell { font-size: 1rem; }
 
 .summary-table .MuiDataGrid-cell { border-bottom: 0 !important; }
+
+.prediction-header { font-weight: bold !important; }

@@ -22,8 +22,8 @@ const SummaryTransactions = () => {
   const totalQuantity = getTotalQuantity(state.transactions)
 
   const columns = [
-    { field: 'summary-label', headerName: '', width: 200, align: 'right', cellClassName: 'summary-cell' },
-    { field: 'summary-value', headerName: '', width: 200, type: 'number', cellClassName: 'summary-cell' },
+    { field: 'summary-label', headerName: '', width: 170, align: 'right', cellClassName: 'summary-cell' },
+    { field: 'summary-value', headerName: '', flex: 1, type: 'number', cellClassName: 'summary-cell' },
   ]
   
   const rows = [

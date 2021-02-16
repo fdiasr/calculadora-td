@@ -5,7 +5,7 @@ const TransactionsHeader = () => {
       <div className='transactions-header-data'>
         <div className='transactions-header-date'>Data</div>
         <div className='transactions-header-price'>Compra Valor</div>
-        <div className='transactions-header-tax'>Compra Tx</div>
+        <div className='transactions-header-tax'>Taxa</div>
         <div className='transactions-header-fraction'>Fração</div>
         <div className='transactions-header-fraction-tax'>Fração %</div>
         <div className='transactions-header-fraction-price'>Fração Valor</div>
