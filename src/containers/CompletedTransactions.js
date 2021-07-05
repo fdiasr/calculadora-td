@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { v4 as uuidv4 } from 'uuid'
-import { Container, Box } from "@material-ui/core";
-// import React, { useEffect } from "react";
+import { Container, Box, Icon, IconButton } from "@material-ui/core";
 
-import { TransactionsUseContext, defaultTransaction } from './stores'
+import { TransactionsUseContext, defaultTransaction, ViewerUseContext } from './stores'
 
 import { TransactionsList } from '../components'
 
@@ -12,15 +11,22 @@ const CompletedTransactions = () => {
 
   const { state, dispatch } = TransactionsUseContext()
 
-  // useEffect(() => {
-  //   console.log('use effect ?????')
-  // })
+  const viewerState = ViewerUseContext().state.viewer
+  const idState = ViewerUseContext().state.id
+  const viewerDispatch = ViewerUseContext().dispatch
+
+  if (viewerState !== 'transactions') {
+    return null
+  }
+
+  const viewCallback = () => {
+    viewerDispatch({ type: 'SUMMARY' })
+  }
 
   const newTransaction = () => ({ ...defaultTransaction, id: uuidv4() })
 
   const addCallback = () => {
     dispatch({ type: 'ADD', payload: newTransaction() })
-    // ReactDOM.findDOMNode()
   }
 
   const removeCallback = id => {
@@ -32,12 +38,12 @@ const CompletedTransactions = () => {
   }
 
   return (
-    <Box boxShadow={3}>
+    <Box width={0.9} mx="auto" boxShadow={3} >
       <Container className="completed-transactions">
-        <h2>Aportes Realizados</h2>
-
-        {/* <div className='tools'>IMPORTAR/EXPORTAR</div> */}
-
+        <IconButton aria-label="more" onClick={viewCallback} >
+          <Icon>arrow_back</Icon>
+        </IconButton>
+        <h2>Aportes Realizados para {idState}</h2>
         <TransactionsList 
           transactions={state.transactions}
           addCallback={addCallback}
