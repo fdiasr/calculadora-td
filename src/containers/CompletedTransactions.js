@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { v4 as uuidv4 } from 'uuid'
 import { Container, Box, Icon, IconButton } from "@material-ui/core";
 
