@@ -14,6 +14,8 @@ const CompletedTransactions = () => {
   const idState = ViewerUseContext().state.id
   const viewerDispatch = ViewerUseContext().dispatch
 
+  console.log(ViewerUseContext().state);
+
   if (viewerState !== 'transactions') {
     return null
   }
@@ -44,7 +46,7 @@ const CompletedTransactions = () => {
         </IconButton>
         <h2>Aportes Realizados para {idState}</h2>
         <TransactionsList 
-          transactions={state.transactions}
+          transactions={state.transactions[idState]}
           addCallback={addCallback}
           removeCallback={removeCallback}
           changeCallback={changeCallback}

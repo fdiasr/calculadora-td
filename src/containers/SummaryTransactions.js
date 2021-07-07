@@ -45,7 +45,7 @@ const SummaryTransactions = () => {
 
   const renderTools = params => {
     return (
-      <IconButton aria-label="more" onClick={() => viewCallback(params.value)}>
+      <IconButton aria-label="more" onClick={() => viewCallback(params.row.id)}>
         <Icon>add_circle</Icon>
       </IconButton>
     )

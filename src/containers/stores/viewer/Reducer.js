@@ -1,16 +1,17 @@
 const Reducer = (state, {type, payload}) => {
+  console.log(type, payload);
   switch (type) {
     case 'SUMMARY':
       return {
         ...state,
         viewer: 'summary',
-        id: payload
+        id: ''
       }
     case 'TRANSACTIONS':
       return {
         ...state,
         viewer: 'transactions',
-        id: ''
+        id: payload
       }
     default:
       return state
