@@ -11,7 +11,7 @@ const CompletedTransactions = () => {
   const { state, dispatch } = TransactionsUseContext()
 
   const viewerState = ViewerUseContext().state.viewer
-  const idState = ViewerUseContext().state.id
+  const optionId = ViewerUseContext().state.id
   const viewerDispatch = ViewerUseContext().dispatch
 
   console.log(ViewerUseContext().state);
@@ -24,18 +24,22 @@ const CompletedTransactions = () => {
     viewerDispatch({ type: 'SUMMARY' })
   }
 
-  const newTransaction = () => ({ ...defaultTransaction, id: uuidv4() })
+  const newTransaction = () => ({ ...defaultTransaction, id: uuidv4(), isLocked: false })
 
   const addCallback = () => {
-    dispatch({ type: 'ADD', payload: newTransaction() })
+    dispatch({ type: 'ADD', optionId, payload: newTransaction() })
   }
 
   const removeCallback = id => {
-    dispatch({ type: 'REMOVE', payload: { id } })
+    dispatch({ type: 'REMOVE', optionId, payload: { id } })
+  }
+
+  const lockCallback = id => {
+    dispatch({ type: 'LOCK', optionId, payload: { id } })
   }
 
   const changeCallback = transaction => {
-    dispatch({ type: 'UPDATE', payload: transaction })
+    dispatch({ type: 'UPDATE', optionId, payload: transaction })
   }
 
   return (
@@ -44,11 +48,12 @@ const CompletedTransactions = () => {
         <IconButton aria-label="more" onClick={viewCallback} >
           <Icon>arrow_back</Icon>
         </IconButton>
-        <h2>Aportes Realizados para {idState}</h2>
+        <h2>Aportes Realizados para {optionId}</h2>
         <TransactionsList 
-          transactions={state.transactions[idState]}
+          transactions={state.transactions[optionId]}
           addCallback={addCallback}
           removeCallback={removeCallback}
+          lockCallback={lockCallback}
           changeCallback={changeCallback}
         />
       </Container>

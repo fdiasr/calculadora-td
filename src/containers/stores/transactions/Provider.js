@@ -3,7 +3,7 @@ import React, { useReducer } from "react"
 import Reducer from './Reducer'
 import { TransactionsContext } from '.'
 
-const defaultInitialState = { transactions: [] }
+const defaultInitialState = { transactions: {} }
 
 const Provider = ({ children, initialState }) => {
     const definedInitialState = initialState ? initialState : defaultInitialState

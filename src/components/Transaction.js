@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 
-const Transaction = ({ id, date, price, tax, fraction, changeCallback, isFutureTransaction }) => {
+const Transaction = ({ id, date, price, tax, fraction, changeCallback, isLocked }) => {
 
-  const getValues = () =>  ({ id, date, price, tax, fraction })
+  const getValues = () =>  ({ id, date, price, tax, fraction, isLocked })
 
   const handleOnChange = event => {
     const key = event.target.id
@@ -21,20 +21,20 @@ const Transaction = ({ id, date, price, tax, fraction, changeCallback, isFutureT
           name="date"
           value={date}
           onChange={handleOnChange}
-          disabled={isFutureTransaction}
+          disabled={isLocked}
           InputLabelProps={{
             shrink: true,
           }}
         />
       </div>
       <div className="transaction-item-price">
-        <Input id='price' type="number" className='input_price' onChange={handleOnChange} value={price} readOnly={isFutureTransaction} />
+        <Input id='price' type="number" className='input_price' onChange={handleOnChange} value={price} readOnly={isLocked} />
       </div>
       <div className="transaction-item-tax">
-        <Input id='tax' type="number" className='input_tax' onChange={handleOnChange} value={tax} />
+        <Input id='tax' type="number" className='input_tax' onChange={handleOnChange} value={tax} readOnly={isLocked} />
       </div>
       <div className="transaction-item-fraction">
-        <Input id='fraction' type="number" className='input_fraction' onChange={handleOnChange} value={fraction} />
+        <Input id='fraction' type="number" className='input_fraction' onChange={handleOnChange} value={fraction} readOnly={isLocked} />
       </div>
       <div className="transaction-item-fraction-tax">
         <Input id='fraction_tax' type="number" className='input_fraction_tax' value={fraction * tax} readOnly />
@@ -51,6 +51,7 @@ Transaction.propTypes = {
   price: PropTypes.number.isRequired,
   tax: PropTypes.number.isRequired,
   fraction: PropTypes.number.isRequired,
+  isLocked: PropTypes.bool.isRequired,
   changeCallback: PropTypes.func.isRequired
 }
 
