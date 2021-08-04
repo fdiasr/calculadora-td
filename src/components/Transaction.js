@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 
-const Transaction = ({ id, date, price, tax, fraction, changeCallback, isLocked }) => {
+const Transaction = ({ id, date, tax, price, quantity, isLocked, changeCallback }) => {
 
-  const getValues = () =>  ({ id, date, price, tax, fraction, isLocked })
+  const getValues = () =>  ({ id, date, tax, price, quantity, isLocked })
 
   const handleOnChange = event => {
     const key = event.target.id
@@ -34,13 +34,13 @@ const Transaction = ({ id, date, price, tax, fraction, changeCallback, isLocked 
         <Input id='tax' type="number" className='input_tax' onChange={handleOnChange} value={tax} readOnly={isLocked} />
       </div>
       <div className="transaction-item-fraction">
-        <Input id='fraction' type="number" className='input_fraction' onChange={handleOnChange} value={fraction} readOnly={isLocked} />
+        <Input id='quantity' type="number" className='input_fraction' onChange={handleOnChange} value={quantity} readOnly={isLocked} />
       </div>
       <div className="transaction-item-fraction-tax">
-        <Input id='fraction_tax' type="number" className='input_fraction_tax' value={fraction * tax} readOnly />
+        <Input id='fraction_tax' type="number" className='input_fraction_tax' value={quantity * tax} readOnly />
       </div>
       <div className="transaction-item-fraction-price">
-        <Input id='fraction_price' type="number" className='input_fraction_price' value={fraction * price} readOnly />
+        <Input id='fraction_price' type="number" className='input_fraction_price' value={quantity * price} readOnly />
       </div>
     </div>
   )

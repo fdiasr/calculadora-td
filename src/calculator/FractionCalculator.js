@@ -14,12 +14,12 @@ class FractionCalculator {
   }
 
   static taxFor(transaction) {
-    const tax = transaction.tax * transaction.fraction
+    const tax = transaction.tax * transaction.quantity
     return _.round(tax, 6)
   }
 
   static valueFor(transaction) {
-    const value = transaction.price * transaction.fraction
+    const value = transaction.price * transaction.quantity
     return _.round(value, 6)
   }
 }

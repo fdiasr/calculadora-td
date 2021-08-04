@@ -46,7 +46,7 @@ const Reducer = (state, { type, optionId, payload }) => {
       console.log(' remove ');
       const removedTransactions = {
         ...state.transactions,
-        optionId: state.transactions[optionId].filter(transaction => !isEqual(transaction, payload))
+        [optionId]: state.transactions[optionId].filter(transaction => !isEqual(transaction, payload))
       }
       return { ...state, transactions: removedTransactions }
 

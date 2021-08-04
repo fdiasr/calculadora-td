@@ -27,7 +27,7 @@ class Calculator {
   }
 
   calculateTotalQuantity(fractions) {
-    return _.sumBy(fractions, item => item.fraction)
+    return _.sumBy(fractions, item => item.quantity)
   }
 
   calculateMedianQuantity(fractions, totalQuantity) {

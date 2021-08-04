@@ -27,11 +27,12 @@ const SummaryTransactions = () => {
   };
 
   const getTotalValue = transactions => {
-    const totalQuantity = _.reduce(transactions, (sum, t) => sum + t.fraction_price, 0)
-    return _.round(totalQuantity, 2)
+    const totalValue = _.reduce(transactions, (sum, t) => sum + (t.quantity * t.price), 0)
+    return _.round(totalValue, 2)
   };
 
   const consolidate = (id, transactions) => {
+    console.log(id, transactions)
     const description = 'Desc: ' + id;
     const quantity = getTotalQuantity(transactions);
     const value = getTotalValue(transactions);
