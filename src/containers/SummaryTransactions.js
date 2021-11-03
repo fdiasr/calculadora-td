@@ -3,13 +3,16 @@ import _ from "lodash";
 import { Box, Icon, IconButton } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 
-import { TransactionsUseContext, ViewerUseContext } from './stores'
+import { StocksUseContext, ViewerUseContext } from './stores'
 import Calculator from "../calculator/Calculator";
 
 const SummaryTransactions = () => {
 
+  // TODO MOVE LOGIC TO OTHER FILE 
+
   // VIEWER VALIDATION AND PREPARATION
   const dispatchViewer = ViewerUseContext().dispatch
+  
   const stateViewer = ViewerUseContext().state.viewer
 
   if (stateViewer !== 'summary') {
@@ -19,7 +22,7 @@ const SummaryTransactions = () => {
   const viewCallback = payload => dispatchViewer({ type: 'TRANSACTIONS', payload })
 
   // TRANSACTION PROCESSING
-  const { state } = TransactionsUseContext()
+  const { state } = StocksUseContext()
 
   const getTotalQuantity = transactions => {
     const totalQuantity = _.reduce(transactions, (sum, t) => sum + t.quantity, 0)
@@ -32,7 +35,6 @@ const SummaryTransactions = () => {
   };
 
   const consolidate = (id, transactions) => {
-    console.log(id, transactions)
     const description = 'Desc: ' + id;
     const quantity = getTotalQuantity(transactions);
     const value = getTotalValue(transactions);
@@ -42,7 +44,15 @@ const SummaryTransactions = () => {
     return { id, description, quantity, value, medianPrice, medianTax };
   };
 
-  const summary = Object.entries(state.transactions).map(([id, transactions]) => consolidate(id, transactions));
+  const summary = Object.entries(state.stocks).map(([id, transactions]) => consolidate(id, transactions));
+
+  const renderType = params => {
+    return (
+      <IconButton aria-label="more" onClick={() => viewCallback(params.row.id)}>
+        <Icon>add_circle</Icon>
+      </IconButton>
+    )
+  };
 
   const renderTools = params => {
     return (
@@ -53,17 +63,24 @@ const SummaryTransactions = () => {
   };
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 150, align: 'left', cellClassName: 'summary-cell' },
-    { field: 'description', headerName: 'DESCRICAO', width: 250, align: 'left', cellClassName: 'summary-cell' },
-    { field: 'quantity', headerName: 'QTDE TOTAL', flex: 1, type: 'number', cellClassName: 'summary-cell' },
-    { field: 'value', headerName: 'VALOR TOTAL', flex: 1, type: 'number', cellClassName: 'summary-cell' },
-    { field: 'medianPrice', headerName: 'PRECO MEDIO', flex: 1, type: 'number', cellClassName: 'summary-cell' },
-    { field: 'medianTax', headerName: 'TAXA MEDIA', flex: 1, type: 'number', cellClassName: 'summary-cell' },
+    { 
+      field: 'type',
+      headerName: 'TIPO',
+      width: 150,
+      align: 'left',
+      cellClassName: 'summary-cell summary-field-type',
+      renderCell: renderType
+    },
+    { field: 'description', headerName: 'DESCRICAO', width: 250, align: 'left', cellClassName: 'summary-cell summary-field-description' },
+    { field: 'quantity', headerName: 'QTDE TOTAL', flex: 1, type: 'number', cellClassName: 'summary-cell summary-field-quantity' },
+    { field: 'value', headerName: 'VALOR TOTAL', flex: 1, type: 'number', cellClassName: 'summary-cell summary-field-value' },
+    { field: 'medianPrice', headerName: 'PRECO MEDIO', flex: 1, type: 'number', cellClassName: 'summary-cell summary-field-median-price' },
+    { field: 'medianTax', headerName: 'TAXA MEDIA', flex: 1, type: 'number', cellClassName: 'summary-cell summary-field-median-tax' },
     { 
       field: 'DETAILS',
       headerName: '', 
       flex: 1, 
-      cellClassName: 'summary-cell',
+      cellClassName: 'summary-cell summary-field-details',
       renderCell: renderTools
     }
   ];

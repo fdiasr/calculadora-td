@@ -1,18 +1,20 @@
 import React, { useReducer } from "react"
 
 import Reducer from './Reducer'
-import { TransactionsContext } from '.'
+import { StocksContext } from '.'
 
-const defaultInitialState = { transactions: {} }
+const defaultInitialState = { stocks: [] }
+// initialState={{ stocks: [ ipca26bradesco, ipca35itau ] }}
 
 const Provider = ({ children, initialState }) => {
     const definedInitialState = initialState ? initialState : defaultInitialState
+    // console.log(definedInitialState);
     const [state, dispatch] = useReducer(Reducer, definedInitialState)
 
     return (
-        <TransactionsContext.Provider value={{ state, dispatch }}>
+        <StocksContext.Provider value={{ state, dispatch }}>
             {children}
-        </TransactionsContext.Provider>
+        </StocksContext.Provider>
     )
 }
 

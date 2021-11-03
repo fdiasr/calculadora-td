@@ -1,15 +1,18 @@
-import { TransactionsUseContext } from './transactions'
+// import { TransactionsUseContext } from './transactions'
+import { ViewerUseContext, Provider as ViewerProvider } from './viewer'
+import { StocksUseContext, Provider as StocksProvider } from './stocks'
 import { FutureTransactionsUseContext } from './future'
-import { ViewerUseContext } from './viewer'
 
 const defaultTransaction = { date: '2021-01-01', tax: 0, price: 0, quantity: 1.00 }
 
 const futureTransaction = { date: '2022-01-01', tax: 0, price: 0, quantity: 1.00 }
 
 export { 
-  TransactionsUseContext, 
+  StocksUseContext, 
   FutureTransactionsUseContext,
   ViewerUseContext,
   defaultTransaction, 
-  futureTransaction
+  futureTransaction,
+  ViewerProvider,
+  StocksProvider
 }

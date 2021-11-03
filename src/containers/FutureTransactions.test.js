@@ -11,12 +11,12 @@ let futureTransactions = null
 
 const getInputFrom = element => futureTransactions.find(element).find('input')
 
-describe('Future Transactions component', () => {
+describe.skip('Future Transactions component', () => {
   beforeEach(() => {
     futureTransactions = mount(<Provider><FutureTransactions /></Provider>)
   })
 
-  describe('renders', () => {
+  describe.skip('renders', () => {
     test('title element', () => {
       expect(futureTransactions.find('h2')).toHaveLength(1)
     })
@@ -25,7 +25,7 @@ describe('Future Transactions component', () => {
     })  
   })
 
-  describe('manipulates list of new Future Transactions', () => {
+  describe.skip('manipulates list of new Future Transactions', () => {
     test('validate ZERO items', () => {
       expect(futureTransactions.find(Transaction)).toHaveLength(0)
     })
@@ -36,7 +36,7 @@ describe('Future Transactions component', () => {
       expect(futureTransactions.find(Transaction)).toHaveLength(1)
     })
 
-    test.only('block date and price of a new item', () => {
+    test('block date and price of a new item', () => {
       futureTransactions.find('button.transaction-item-add').simulate('click')
       
       const dateIsReadOnly = getInputFrom('.transaction-item-date').get(0).props.disabled

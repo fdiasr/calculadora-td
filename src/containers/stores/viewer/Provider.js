@@ -3,7 +3,7 @@ import React, { useReducer } from "react"
 import Reducer from './Reducer'
 import { ViewerContext } from '.'
 
-const defaultInitialState = { viewer: 'summary' }
+const defaultInitialState = { viewer: 'summary', id: '' }
 
 const Provider = ({ children, initialState }) => {
     const definedInitialState = initialState ? initialState : defaultInitialState

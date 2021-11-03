@@ -1,5 +1,4 @@
 const Reducer = (state, {type, payload}) => {
-  console.log(type, payload);
   switch (type) {
     case 'SUMMARY':
       return {

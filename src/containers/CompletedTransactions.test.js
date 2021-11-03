@@ -1,19 +1,42 @@
+
+// describe('Global Describe', () => {
+//   beforeEach(() => console.log('1 - beforeEach'));
+
+//   describe('Scoped / Nested block', () => {
+//     test('exec test 1', () => console.log('2 - test111'));
+//     test('exec test 2', () => console.log('2 - test222'));
+//   });
+
+// });
+
 import React from 'react'
 import { mount } from 'enzyme'
 
-import { Provider } from './stores/transactions'
+import { ViewerProvider, StocksProvider } from './stores'
 import CompletedTransactions from './CompletedTransactions'
 
 import Transaction from '../components/Transaction'
 import TransactionsList from '../components/TransactionsList'
 
-import data from '../calculator/mockData'
+import { ipca26bradesco } from '../data'
 
 let completedTransactions = null
 
+const mountCompletedTransactions = () => (mount(
+  <ViewerProvider initialState={{ viewer: 'transactions', id: ipca26bradesco.key }}>
+    <StocksProvider initialState={{ stocks: [ { ...ipca26bradesco, transactions: [] } ] }}>
+      <CompletedTransactions />
+    </StocksProvider>
+  </ViewerProvider>
+))
+
 describe('Completed Transactions component', () => {
   beforeEach(() => {
-    completedTransactions = mount(<Provider><CompletedTransactions /></Provider>)
+    completedTransactions = mountCompletedTransactions();
+  })
+
+  afterEach(() => {
+    completedTransactions.unmount()
   })
 
   describe('renders', () => {
@@ -66,19 +89,19 @@ describe('Completed Transactions component', () => {
   const findTransactionIdByIndex = index => {
     return completedTransactions
       .find(TransactionsList)
-      .find('.transaction-item-data')
+      .find('.transaction-item')
       .at(index)
-      .prop('data-id')
+      .prop('data-transaction-id')
   }
 
   const update = (transactionId, fieldName, newValue) => {
-    const element = completedTransactions.find({ 'data-id': transactionId}).find(`input#${fieldName}`)
+    const element = completedTransactions.find({ 'data-transaction-id': transactionId}).find(`input#${fieldName}`)
     element.simulate('change', { target: { id: fieldName, value: newValue } })
   }
 
   const get = (transactionId, fieldName) => {
     return completedTransactions
-      .find({ 'data-id': transactionId})
+      .find({ 'data-transaction-id': transactionId})
       .find(`input#${fieldName}`)
       .get(0)
   }
@@ -86,10 +109,18 @@ describe('Completed Transactions component', () => {
   describe('changes values of Transaction List items', () => {
 
     beforeEach(() => {
-      completedTransactions = mount(<Provider initialState={{ transactions: data }}>
-        <CompletedTransactions />
-      </Provider>)
+      completedTransactions = mount(
+        <ViewerProvider initialState={{ viewer: 'transactions', id: ipca26bradesco.key }}>
+          <StocksProvider initialState={{ stocks: [ ipca26bradesco ] }}>
+            <CompletedTransactions />
+          </StocksProvider>
+        </ViewerProvider>
+      )
     })
+  
+    afterEach(() => {
+      // completedTransactions.unmount()
+    })  
 
     test('change date of first transaction', () => {
       const transactionId = findTransactionIdByIndex(0)
@@ -124,9 +155,9 @@ describe('Completed Transactions component', () => {
       expect(field.props.value).toBe(newValue)
     })
 
-    test('change fraction of fourth transaction', () => {
+    test('change quantity of fourth transaction', () => {
       const transactionId = findTransactionIdByIndex(3)
-      const fieldName = 'fraction'
+      const fieldName = 'quantity'
       const newValue = 0.18
       
       update(transactionId, fieldName, newValue)

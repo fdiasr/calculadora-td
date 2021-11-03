@@ -39,9 +39,9 @@ describe('TD Calculator', () => {
     // const quantityToPredict = 0.18
 
     const futureTransactions = [
-      { date: '2022-01-01', price: 0, tax: 2.70, fraction: 0.18 },
-      { date: '2022-01-01', price: 0, tax: 2.50, fraction: 0.18 },
-      { date: '2022-01-01', price: 0, tax: 2.00, fraction: 0.18 },
+      { date: '2022-01-01', price: 0, tax: 2.70, quantity: 0.18 },
+      { date: '2022-01-01', price: 0, tax: 2.50, quantity: 0.18 },
+      { date: '2022-01-01', price: 0, tax: 2.00, quantity: 0.18 },
     ]
 
     const response = calc.predicts(futureTransactions)

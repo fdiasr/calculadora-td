@@ -1,52 +1,30 @@
 import React from 'react'
 import { mount } from 'enzyme'
+import { DataGrid } from "@material-ui/data-grid";
 
-import { Provider } from './stores/transactions'
+import { ViewerProvider, StocksProvider } from './stores'
 
 import SummaryTransactions from './SummaryTransactions'
 
-import data from '../calculator/mockData'
+import { ipca26bradesco } from '../data'
 
 let summaryTransactions = null
 
-describe('Completed Transactions component', () => {
+describe('Summary Transactions component', () => {
   beforeEach(() => {
-    summaryTransactions = mount(<Provider initialState={{ transactions: data }}><SummaryTransactions /></Provider>)
+    summaryTransactions = mount(
+      <ViewerProvider>
+        <StocksProvider initialState={{ stocks: [ ipca26bradesco ] }}>
+          <SummaryTransactions />
+        </StocksProvider>
+      </ViewerProvider>
+    )
   })
 
-  describe('renders', () => {
-    test('total quantity label', () => {
-      expect(summaryTransactions.find('.total-quantity-label')).toHaveLength(1)
+  describe('summary', () => {
+    test('validates summary table', () => {
+      // ADD DATA VALIDATION IF POSSIBLE
+      expect(summaryTransactions.find(DataGrid)).toHaveLength(1)
     })
-    test('total quantity value', () => {
-      expect(summaryTransactions.find('.total-quantity-value')).toHaveLength(1)
-    })
-    test('median tax label', () => {
-      expect(summaryTransactions.find('.median-tax-label')).toHaveLength(1)
-    })
-    test('median tax value', () => {
-      expect(summaryTransactions.find('.median-tax-value')).toHaveLength(1)
-    })
-    test('median price label', () => {
-      expect(summaryTransactions.find('.median-price-label')).toHaveLength(1)
-    })
-    test('median price value', () => {
-      expect(summaryTransactions.find('.median-price-value')).toHaveLength(1)
-    })
-  })
-
-  describe('calculates summary', () => {
-    test('for Total Quantity', () => {
-      expect(summaryTransactions.find('.total-quantity-value').text()).toEqual("1.96")
-    })
-    test('for Median Quantity', () => {
-      expect(summaryTransactions.find('.median-quantity-value').text()).toEqual("0.18")
-    })
-    test('for Median Tax', () => {
-      expect(summaryTransactions.find('.median-tax-value').text()).toEqual("2.8")
-    })
-    test('for Median Price', () => {
-      expect(summaryTransactions.find('.median-price-value').text()).toEqual("2808.49")
-    })  
   })
 })
